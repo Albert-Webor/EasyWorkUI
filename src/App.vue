@@ -41,7 +41,6 @@ const menuItems = [
 const tabs = ref([])
 const activeKey = ref(null)
 
-const activeTab = computed(() => tabs.value.find(t => t.key === activeKey.value))
 
 function onFeatureSelect(feature) {
   const comp = featureMap[feature.key]
@@ -157,7 +156,9 @@ watch(searchQuery, () => {
           </div>
         </div>
         <div class="tab-content">
-          <component :is="activeTab?.component" :key="activeKey" />
+          <div v-for="tab in tabs" :key="tab.key" v-show="tab.key === activeKey">
+            <component :is="tab.component" />
+          </div>
         </div>
       </template>
     </main>

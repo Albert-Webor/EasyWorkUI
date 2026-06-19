@@ -32,7 +32,7 @@ function selectFeature(feature) {
           @dblclick="toggleExpand(item.id)"
         >
           {{ item.label }}
-          <span class="arrow" :class="{ expanded: expandedMap[item.id] }">▶</span>
+          <span class="arrow" :class="{ expanded: expandedMap[item.id] }" @click.stop="toggleExpand(item.id)">▶</span>
         </button>
         <div v-if="expandedMap[item.id]" class="sub-list">
           <button
@@ -96,7 +96,7 @@ function selectFeature(feature) {
   color: #fff;
 }
 .arrow {
-  font-size: 10px;
+  font-size: 15px;
   transition: transform 0.2s;
 }
 .arrow.expanded {

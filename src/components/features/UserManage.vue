@@ -66,12 +66,17 @@ async function handleSubmit() {
   whereClauses.value = []
   fields.value = []
 
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), 3000)
+
   try {
     const res = await fetch('/sql/AP001', {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain' },
       body: sql,
+      signal: controller.signal,
     })
+    clearTimeout(timer)
     if (!res.ok) throw new Error(`请求失败: ${res.status}`)
     const list = await res.json()
     const data = list[0] || {}
@@ -80,7 +85,12 @@ async function handleSubmit() {
     whereClauses.value = data.swhere || []
     fields.value = data.sfields || []
   } catch (err) {
-    alert('请求出错: ' + err.message)
+    clearTimeout(timer)
+    if (err.name === 'AbortError') {
+      alert('请求超时')
+    } else {
+      alert('请求出错: ' + err.message)
+    }
   } finally {
     loading.value = false
   }
