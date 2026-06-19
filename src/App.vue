@@ -12,15 +12,15 @@ const featureMap = { UserManage, RoleManage, OrderManage, ProductManage, ReportS
 
 const menuItems = [
   {
-    label: '系统管理',
+    label: 'SQL处理',
     id: 'sys',
     features: [
-      { name: '用户管理', key: 'UserManage' },
-      { name: '角色管理', key: 'RoleManage' },
+      { name: '可执行SQL结构分析', key: 'UserManage' },
+      { name: 'NameSqlID查询SQL', key: 'RoleManage' },
     ]
   },
   {
-    label: '业务管理',
+    label: '代码信息提取',
     id: 'biz',
     features: [
       { name: '订单管理', key: 'OrderManage' },
@@ -81,7 +81,7 @@ function closeTabMouseDown(e, key) {
     <main class="main-content">
       <div v-if="tabs.length === 0" class="welcome">
         <h1>EasyWork</h1>
-        <p>请从左侧菜单选择功能</p>
+        <p>Create By Shaun, Start from 20260619</p>
       </div>
       <template v-else>
         <div class="tab-bar">
